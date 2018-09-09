@@ -4,14 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
->
 
-    <TextView
-        android:id="@+id/hello_world"
+>
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/androidparty"
+        android:scaleType="centerCrop"
+        />
+    <TextView
+        android:id="@+id/from_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="From Ahmad"
         android:visibility="visible"
-        android:background="#76A63F"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:textSize="36sp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@android:color/white"
+        />
+    <TextView
+        android:id="@+id/to_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Happy Birthday Sofia :)!"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:textSize="36sp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@android:color/white"
+        />
 
 </RelativeLayout>
