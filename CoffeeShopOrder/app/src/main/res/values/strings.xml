@@ -1,3 +1,15 @@
-<resources>
+<resources xmlns:xlif="http://schemas.android.com/tools">
     <string name="app_name">CoffeeShopOrder</string>
+    <string name="name">Name</string>
+
+    <string name="toppings">Toppings</string>
+    <string name="topping1">Whipped Cream</string>
+    <string name="topping2">Chocolate</string>
+    <string name="order_button_caption">Place Order</string>
+
+    <!-- Resources for place order module -->
+    <string name="customer_name">Name: <xlif:g id="customer_name" example="Ahmad">%s</xlif:g> </string>
+    <string name="quant">Quantity: <xlif:g id="quant" example="1">%d</xlif:g> </string>
+    <string name="total">Total: $<xlif:g id="total" example="2.0">%.2f</xlif:g> </string>
+    <string name="thank_you">Thank You!</string>
 </resources>

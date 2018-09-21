@@ -7,11 +7,15 @@ package com.example.android.coffeeshoporder;
  * in the project's AndroidManifest.xml file.
  **/
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -22,6 +26,9 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity {
 
     int quantity=0;
+    final int COFFEE_COST=5;
+    final int WHIPPEDCREAM_COST=1;
+    final int CHOCO_COST=2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,26 +39,58 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        float price = quantity * 5;
+
         CheckBox wcreamTopping = (CheckBox) findViewById(R.id.topping_chkbox);
         CheckBox chocoTopping = (CheckBox) findViewById(R.id.topping_chocho_chkbox);
+        EditText nameField = (EditText) findViewById(R.id.customer_name);
+        String customerName = nameField.getText().toString();
 
         boolean whippedCream = false;
         boolean chocolate = false;
 
+        if(customerName.matches(""))
+        {
+            customerName = "Jhon Doe";
+        }
         if(wcreamTopping.isChecked()){
             whippedCream=true;
         }
         if (chocoTopping.isChecked()) {
             chocolate = true;
         }
+        float totalBill=caluclatePrice(quantity,whippedCream,chocolate);
+
+        //displayMessage(createOrderSummary(customerName,totalBill,whippedCream,chocolate));
+
+        final String subject ="Order details for Mr." + customerName;
+
+        composeEmail(subject,createOrderSummary(customerName,totalBill,whippedCream,chocolate));
+
 
         //Log.v("MainActivity","whippedCream"+whippedCream);
 
-        //String priceMessage="Total: $" + price + "\nThank You!";
-        //createOrderSummary(quantity, price);
-        displayMessage(createOrderSummary(price,whippedCream,chocolate));
-        //displayPrice(quantity*5);
+    }
+
+    public void composeEmail(String subject,String order) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        //intent.putExtra(Intent.EXTRA_EMAIL, );
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT,order);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public float caluclatePrice(int quantity,boolean addWhippedCream,boolean addChocolate){
+        float price = quantity * COFFEE_COST;
+        if(addWhippedCream){
+            price+=WHIPPEDCREAM_COST;
+        }
+        if(addChocolate){
+            price+=CHOCO_COST;
+        }
+        return price;
     }
     public void increment(View view) {
 
@@ -91,15 +130,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private String createOrderSummary(float price,boolean addWhippedCream,boolean addChocolate){
+    private String createOrderSummary(String customerName,float price,boolean addWhippedCream,boolean addChocolate){
         String orderSummary="";
 
-        orderSummary="Name : XYZ";
+        orderSummary=getString(R.string.customer_name, customerName);
         orderSummary += "\nAdd Whipped Cream: "+ addWhippedCream;
         orderSummary += "\nAdd Choco Topping: "+ addChocolate;
-        orderSummary += "\nQuantity: " + quantity;
-        orderSummary += "\nTotal = $ "+ price+"\nThank you!";
-
+        orderSummary += "\n"+getString(R.string.quant, quantity);
+        orderSummary += "\n"+getString(R.string.total, price);
+        orderSummary += "\n"+getString(R.string.thank_you);
 
         return orderSummary;
     }
