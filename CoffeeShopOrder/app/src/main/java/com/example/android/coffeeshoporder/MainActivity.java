@@ -9,7 +9,9 @@ package com.example.android.coffeeshoporder;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -31,8 +33,24 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
         float price = quantity * 5;
-        String priceMessage="Total: $" + price + "\nThank You!";
-        displayMessage(priceMessage);
+        CheckBox wcreamTopping = (CheckBox) findViewById(R.id.topping_chkbox);
+        CheckBox chocoTopping = (CheckBox) findViewById(R.id.topping_chocho_chkbox);
+
+        boolean whippedCream = false;
+        boolean chocolate = false;
+
+        if(wcreamTopping.isChecked()){
+            whippedCream=true;
+        }
+        if (chocoTopping.isChecked()) {
+            chocolate = true;
+        }
+
+        //Log.v("MainActivity","whippedCream"+whippedCream);
+
+        //String priceMessage="Total: $" + price + "\nThank You!";
+        //createOrderSummary(quantity, price);
+        displayMessage(createOrderSummary(price,whippedCream,chocolate));
         //displayPrice(quantity*5);
     }
     public void increment(View view) {
@@ -70,6 +88,20 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
+    }
+
+
+    private String createOrderSummary(float price,boolean addWhippedCream,boolean addChocolate){
+        String orderSummary="";
+
+        orderSummary="Name : XYZ";
+        orderSummary += "\nAdd Whipped Cream: "+ addWhippedCream;
+        orderSummary += "\nAdd Choco Topping: "+ addChocolate;
+        orderSummary += "\nQuantity: " + quantity;
+        orderSummary += "\nTotal = $ "+ price+"\nThank you!";
+
+
+        return orderSummary;
     }
 
 }
