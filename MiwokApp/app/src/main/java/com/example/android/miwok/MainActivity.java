@@ -17,6 +17,7 @@ package com.example.android.miwok;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,5 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
+
+        String[] words = new String[10];
+
+        words[0]= "zero";
+        words[1]= "one";
+        words[2]= "two";
+
+        Log.v("NumbersActivity","words at index 0: " + words[0]);
+        Log.v("NumbersActivity","words at index 1: " + words[1]);
+        Log.v("NumbersActivity","words at index 2: " + words[2]);
     }
 }
