@@ -15,11 +15,17 @@
  */
 package com.example.android.miwok;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +43,56 @@ public class MainActivity extends AppCompatActivity {
         Log.v("NumbersActivity","words at index 0: " + words[0]);
         Log.v("NumbersActivity","words at index 1: " + words[1]);
         Log.v("NumbersActivity","words at index 2: " + words[2]);
+
+
+        //Code block to create click listeners
+
+        //Find View with ID numbers
+        TextView numbers = (TextView) findViewById(R.id.numbers);
+        TextView family = (TextView) findViewById(R.id.family);
+        TextView colors = (TextView) findViewById(R.id.colors);
+        TextView phrases = (TextView) findViewById(R.id.phrases);
+        //Set a click listener on the View
+        numbers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create a new intent to open {@link NumbersActivity}
+                Intent i = new Intent(MainActivity.this,NumbersActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //Set a click listener on the View
+        family.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create a new intent to open {@link FamilyActivity}
+                Intent i = new Intent(MainActivity.this,FamilyActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //Set a click listener on the View
+        colors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create a new intent to open {@link ColorsActivity}
+                Intent i = new Intent(MainActivity.this,ColorsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //Set a click listener on the View
+        phrases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create a new intent to open {@link PhrasesActivity}
+                Intent i = new Intent(MainActivity.this,PhrasesActivity.class);
+                startActivity(i);
+            }
+        });
+        //******************************************************************************************
+
     }
+
 }
