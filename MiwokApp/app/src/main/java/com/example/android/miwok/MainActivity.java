@@ -15,6 +15,11 @@
  */
 package com.example.android.miwok;
 
+/*
+ * Notes:
+ * design.google.com/devices
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
